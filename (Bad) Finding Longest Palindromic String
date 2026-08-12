@@ -1,0 +1,25 @@
+class Solution {
+public:
+    string longestPalindrome(string s) 
+    {
+        std::string output;
+        if(s.length()<2)
+        {
+            return s;
+        }
+        for(int j=0;j<s.length();j++)
+        {
+            for(int i=1;i<=s.length()-j;i++)
+            {
+                std::string str=s.substr(j,i);
+                std::string rev=str;
+                std::reverse(rev.begin(),rev.end());
+                if((str==rev) && (output.length()<str.length()))
+                {
+                    output=str;
+                }
+            }
+        }
+        return output;
+    }
+};

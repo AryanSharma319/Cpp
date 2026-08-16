@@ -1,0 +1,34 @@
+#include<iostream>
+#include<vector>
+#include<algorithm>
+using namespace std;
+
+int main()
+{
+    int n{};
+    cout<<"Enter n:";
+    cin>>n;
+    vector<int> arr;
+    for(int i=0;i<n;i++)
+    {
+        int a{};
+        cout<<"Enter ele:";
+        cin>>a;
+        arr.push_back(a);
+    }
+    int ans=1;
+    vector<int> seq(n,1);
+    for(int i=1;i<n;i++)
+    {
+        for(int j=0;j<i;j++)
+        {
+            if(arr[i]>arr[j])
+            {
+                seq[i]=max(seq[i],seq[j]+1);
+            }
+        }
+        ans=max(ans,seq[i]);
+    }
+    cout<<ans<<'\n';
+    return 0;
+}

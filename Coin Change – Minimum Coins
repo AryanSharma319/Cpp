@@ -1,0 +1,66 @@
+#include<iostream>
+#include<vector>
+#include<algorithm>
+using namespace std;
+
+void find(int target, int start, vector<int>& coins, vector<int>& current, vector<int>& ans)
+{
+    if(target==0)
+    {
+        auto count{current.size()};
+        ans.push_back(count);
+        return;
+    }
+
+    for(int i=start;i<coins.size();i++)
+    {
+        if(target>=coins[i])
+        {
+            current.push_back(coins[i]);
+
+            find(target-coins[i],i,coins,current,ans);
+
+            current.pop_back();
+        }
+    }
+}
+
+int main()
+{
+    int n{};
+    cout<<"Enter size:";
+    cin>>n;
+
+    int m{};
+    cout<<"Enter target:";
+    cin>>m;
+
+    vector<int> coins;
+
+    for(int i=0;i<n;i++)
+    {
+        int a{};
+        cout<<"Enter coin value:";
+        cin>>a;
+        coins.push_back(a);
+    }
+
+    vector<int> current;
+    vector<int> ans;
+
+    find(m,0,coins,current,ans);
+
+    if(ans.size()==0)
+    {
+        cout<<-1;
+    }
+    else
+    {
+        auto min_ele=min_element(ans.begin(),ans.end());
+        int mini=*min_ele;
+
+        cout<<mini<<endl;
+    }
+
+    return 0;
+}
